@@ -1,18 +1,19 @@
-function findFibonacci() {
-  const position = document.getElementById('position').value;
-  const result = document.getElementById('result');
-
-  if (position <= 0) {
-    result.textContent = "Please enter a valid position (greater than 0).";
-    return;
-  }
+document.getElementById('fibForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const numElements = parseInt(document.getElementById('numElements').value);
+  const fibResults = document.getElementById('fibResults');
+  fibResults.innerHTML = '';
 
   let a = 0, b = 1;
-  for (let i = 2; i <= position; i++) {
-    let temp = a + b;
+  for (let i = 0; i < numElements; i++) {
+    const next = a + b;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${i}</td>
+      <td>${a}</td>
+    `;
+    fibResults.appendChild(row);
     a = b;
-    b = temp;
+    b = next;
   }
-
-  result.textContent = `The number at position ${position} in the Fibonacci sequence is ${b}.`;
-}
+});
